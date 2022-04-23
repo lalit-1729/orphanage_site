@@ -3,9 +3,9 @@
 ## A simple Django Project 
 
 ## Containing Models for : Feedback, Orphan, Orphanage, and Events
-Database : sqlite *default*
-Framework : Django
-Package : Pillow
+Database : sqlite *default* | 
+Framework : Django | 
+Package : Pillow 
 
 # How to run on your system?
 
