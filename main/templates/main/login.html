@@ -1,0 +1,25 @@
+{%extends "main/header.html" %}
+
+{% block content %}
+	
+	<br>
+	<div>
+    	<h4 style="font-weight: bold; font-size: 250%;" class="flow-text teal-text text-lighten-2 center-align">Login</h4>
+  	</div>
+  	<br>
+
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		
+		
+		<button class="btn", type="submit">
+	 		Login
+	 	</button>
+	</form>
+ 
+	If you do not have a account <a href="/register"><strong>Register</strong></a> instead.
+
+<br>
+<br>	
+{% endblock %}

@@ -1,0 +1,119 @@
+{%extends "main/header.html" %}
+{% load static %}
+{% block content %}
+	<p style="font-weight: bold; font-size: 200%" class="flow-text teal-text text-lighten-2 center-align">
+	{{orp.orphanage_name}} Details
+	</p>
+	<div class="center-align" >
+		<img height="400" class="responsive-img" src="{{orp.image.url}}">
+	</div>	
+
+	<br>
+	<blockquote style="font-size: 130%;" class="flow-text teal-text">{{orp.about}}</blockquote>
+	<p><strong>Date Established : </strong> {{orp.establish_date}}</p>
+	<p><strong>Address : </strong> {{orp.address}}</p>
+	<p><strong>State Located In : </strong> {{orp.state}}</p>
+	<p><strong>Children Stayed here till date : </strong> {{orp.children_count}}</p>
+	<p class="valign-wrapper" href="#">
+		<i class="small material-icons">mail</i> &nbsp; {{orp.email}}
+	</p>					  
+	<p class="valign-wrapper" href="#">
+		<i class="small material-icons">call</i>{{orp.contact_no}}
+	</p>
+
+	<p style="font-weight: bold; font-size: 150%" class="flow-text teal-text text-lighten-2">
+	Events Organised :
+	</p>
+
+	{% if events %}
+		<div class="row">
+        {% for eve in events %}
+            <div class="col s12 m6 l4 ">
+                <div class="card z-depth-5 hoverable">
+                    <div class="card-image">
+                        <img src="{{eve.poster.url}}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator purple-text text-darken-4">{{eve.event_name}}
+                            <i class="purple-text material-icons right">arrow_upward</i>
+                        </span>
+                        <p><strong>Organized By :</strong> {{eve.organised_by.orphanage_name}}</p>
+                        <p><strong>Date :</strong> {{eve.event_date}}</p>
+                        <p><strong>Timing :</strong> {{eve.event_time}}</p>
+                        <p><strong>Venue :</strong> {{eve.venue}}</p>
+                    </div>
+                    <div class="card-reveal">
+                         <span class="card-title grey-text text-darken-4"><strong>{{eve.event_name}}</strong><i class="material-icons right">close</i></span>
+                        <p>{{eve.description}}</p>
+                    </div>
+                </div>
+            </div>  
+        {% endfor %}
+    </div>
+    {% else %}
+    	<p style="font-weight: bold; font-size: 150%" class="flow-text red-text text-darken-3 center-align">
+		No Events yet organized.
+		</p>
+	{% endif %}
+
+	
+
+	<p style="font-weight: bold; font-size: 150%" class="flow-text teal-text text-lighten-2">
+		Some children of the Orphanage :
+	</p>
+
+	<div class="row">
+	{% for child in children %}
+		<div class="col s12 m4">
+		<div class="card">
+			<div class="card-image">
+				<img src="{{child.orphan_image.url}}">
+			</div>
+			<div class="card-content">
+				<span class="card-title">{{child.orphan_name}}</span>
+				<p><strong>Age : </strong>{{child.age}} years</p>
+				{% if child.gender == 'M' %}
+					<p><strong>Gender : </strong> Male</p>
+				{% elif child.gender == 'O' %}
+					<p><strong>Gender : </strong> Other</p>
+				{% else %}
+					<p><strong>Gender : </strong> Female</p>
+				{% endif %}
+			</div>
+		</div>
+		</div>         
+	{% endfor %}
+	</div>
+
+	<a href="{% url 'main:admit_orphan' %}" class="waves-effect waves-light btn-large">
+		Admit Orphan</a>
+	<br><br>
+
+	<p style="font-weight: bold; font-size: 150%" class="flow-text teal-text text-lighten-2">
+		Feedback and Reviews :
+	</p>
+
+	<div class="row">
+		{% if feedbacks %}
+			{% for fb in feedbacks %}
+	    <div class="col s12">
+	      <div class="card blue-grey lighten-3">
+	        <div class="card-content white-text">
+	          <span class="card-title">{{fb.title}}</span>
+	          <p>{{fb.review}}</p>
+	          <br>
+	          <p class="blue-grey-text text-darken-4"><strong>--Feedback by: {{fb.name}}  | &nbsp;Contact No. : {{fb.mobile_no}}</strong></p>
+	        </div>
+	      </div>
+	    </div>    
+	{% endfor %}
+	{% else %}
+		<p style="font-weight: bold; font-size: 150%" class="flow-text red-text text-darken-3 center-align">
+		No Feedbacks or coments yet.
+		</p>
+	{% endif %}
+
+	</div>
+
+
+{% endblock %}

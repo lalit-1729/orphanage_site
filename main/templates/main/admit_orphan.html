@@ -1,0 +1,22 @@
+{%extends "main/header.html" %}
+
+{% block content %}
+	
+	<br>
+	<div>
+    	<h4 style="font-weight: bold; font-size: 250%" class="flow-text teal-text text-lighten-2 center-align">Orphan Registration</h4>
+  	</div>
+  	<br>
+	<form method="POST" class="input-field" enctype="multipart/form-data">
+		{%csrf_token%}
+		{{form.as_p}}
+
+		<button class="btn", type="submit">
+			Admit 
+		</button>
+	</form>
+	<br>
+	<br><br>
+	<br>
+	
+{% endblock %}	

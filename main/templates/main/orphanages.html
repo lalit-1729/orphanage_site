@@ -1,0 +1,48 @@
+{%extends "main/header.html" %}
+
+{% block content %}
+	<p style="font-weight: bold; font-size: 150%" class="flow-text teal-text text-lighten-2 center-align">
+		Here are some of the many Orphanages all over the country. These all orphanages are genuine 
+		and are verified by the <strong>goverment of India</strong>. 
+		Any indian married couple can legally adopt a child from these orphanages and if someone finds an orphan, they can submit them to these orphanages as well.
+	</p>
+
+	<h5><strong>Orphanages</strong></h5>
+
+	<div class="row">
+		{% for orp in orphanages %}		
+			<div class="col s12">
+				<div class="card indigo lighten-2">
+					<div class="card-content white-text">
+					  <span class="card-title">
+						<div class="row">	
+							<div class="grid-example col s12 m7">
+								<span class="flow-text"><strong>{{forloop.counter}}. {{orp.orphanage_name}}</strong> </span>
+							</div>
+							<div class="grid-example col s12 m5">
+								<div class="right-align">
+									<span class="flow-text">{{orp.state}}</span>
+								</div>
+							</div>
+						</div>
+					  </span>
+					  <p>{{orp.about}}</p>
+					</div>
+					<div class="card-action">
+					  <a class="valign-wrapper" href="{% url 'main:orphanage_details' id=orp.id %}"> View More &nbsp;
+					  	<i class="tiny material-icons">call_made</i>
+					  </a>				  
+					  <a class="valign-wrapper" href="#">
+					  	<i class="material-icons">call</i>{{orp.contact_no}}
+					  </a>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+	</div>
+
+	<a href="{% url 'main:orphanage_registration' %}" class="waves-effect waves-light btn-large">Register Orphanage</a>
+	<br>
+	<br>
+{% endblock %}

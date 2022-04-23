@@ -1,0 +1,258 @@
+
+{%extends "main/base.html" %}
+{% load static %}
+{% block ccss %}
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    display: grid;
+    align-content: center;
+    min-height: 100vh;
+}
+section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+    width: 75vw;
+    /*margin: 0 auto;*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 12px
+}
+.image{
+    background-color: #12192c;
+    display: flex;
+    border-radius: 12px 0 0 12px;
+}
+.image img{
+height:50vh;
+margin:50px auto
+}
+.content{
+    background-color: #12192c;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0  12px 12px 0;
+    color: #fff;
+}
+.content h2{
+    text-transform: uppercase;
+    font-size: 36px;
+    letter-spacing: 6px;
+    opacity: 0.9;
+}
+.content span{
+    height: 0.5px;
+    width: 80px;
+    background: #777;
+    margin: 30px 0;
+}
+.content p{
+    padding-bottom: 15px;
+    font-weight: 300;
+    opacity: 0.7;
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 1.7;
+    color:#ffffff
+}
+.links{
+    margin: 15px 0;
+}
+.links li{
+    border: 2px solid #4158D0;
+    list-style: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 160px;
+    text-align: center;
+}
+.links li a{
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+}
+.links li:hover{
+    border-color: #C850C0;
+}
+
+.vertical-line{
+    height: 30px;
+    width: 3px;
+    background: #C850C0;
+    margin: 0 auto;
+}
+.icons{
+    display: flex;
+    padding: 15px 0;
+}
+.icons li{
+    display: block;
+    padding: 5px;
+    margin: 5px;
+}
+.icons li i{
+    font-size: 26px;
+    opacity: 0.8;
+}
+.icons li i:hover{
+    color: #C850C0;
+    cursor: pointer;
+}
+
+
+/*******/
+
+@media(max-width: 900px){
+    section{
+        grid-template-columns: 1fr;
+        width: 100%;
+        border-radius: none;
+    }
+    .image{
+        height: 100vh;
+        border-radius: none;
+    }
+    .content{
+        height: 100vh;
+        border-radius: none;
+    }
+    .content h2{
+        font-size: 20px;
+        margin-top: 50px;
+    }
+    .content span{
+        margin: 20px 0;
+    }
+    .content p{
+        font-size: 14px;
+    }
+    .links li a{
+        font-size: 14px;
+    }
+    .links{
+        margin: 5px 0;
+    }
+    .links li{
+        padding: 6px 10px;
+    }
+    .icons li i{
+        font-size: 15px;
+    }
+}
+.credit{
+    text-align: center;
+    color: #000;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .credit a{
+    text-decoration: none;
+    color:#000;
+    font-weight: bold;
+  }
+</style>
+
+{% endblock %}
+
+{% block base %}
+    <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="center-align"><h5>User Details</h5></div>
+      <p><strong>Username : </strong>{{user.username}}</p>
+      <p><strong>First Name : </strong>{{user.first_name}} | <strong>Last Name : </strong>{{user.last_name}}</p>
+      <p><strong>Email Address : </strong>{{user.email}}</p>
+    </div>
+  </div>
+
+	<nav class="purple">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo"> &nbsp; OrphanCare</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+            <i class="large material-icons">menu</i>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li><a style="font-size:130%" href="/homepage">Home</a></li>
+            <li><a style="font-size:130%"  href="/orphanages">Orphanages</a></li>
+            <li><a style="font-size:130%"  href="{% url 'main:adoption' %}">Adoption</a></li>
+            <li><a style="font-size:130%"  href="/events">Events</a></li>
+            <li><a style="font-size:130%"  href="/about_us">About Us</a></li>
+            {% if user.is_authenticated %}
+                 <li>
+                    <a style="font-size:130%" data-target="modal1" class=" pink darken-3 modal-trigger">{{user.username|title}}</a>
+                 </li>
+
+                 <li>
+                        <a class="pink darken-4" style="font-size:130%" href="/logout">Logout</a>
+                    </li>
+            {% else %}
+                <li><a style="font-size:130%" href="/register">Register</a></li>
+                <li><a style="font-size:130%"  href="/login">Login</a></li>             
+            {% endif %}
+          </ul>
+        </div>
+    </nav>
+
+	<ul class="sidenav purple lighten-3" id="mobile-demo">
+		<br>
+		
+		<li  class="brand-logo"><a style="font-size:170%" href="#!" class=" pink-text text-darken-3 brand-logo"> OrphanCare</a></li>
+		<br>
+		<li><a style="font-size:130%" href="/homepage">Home</a></li>
+		<li><a style="font-size:130%"  href="/orphanages">Orphanages</a></li>
+    	<li><a style="font-size:130%"  href="/events">Events</a></li>
+    	<li><a style="font-size:130%"  href="/about_us">About Us</a></li>
+		{% if user.is_authenticated %}
+			<li><a class="pink darken-3" style="font-size:150%"  href="/account">{{user.username|title}}</a></li>
+			<li><a class="pink darken-4" style="font-size:150%" href="/logout">Logout</a></li>
+		{% else %}
+			<li><a style="font-size:130%" href="/register">Register</a></li>
+			<li><a style="font-size:130%"  href="/login">Login</a></li>
+		{% endif %}
+	</ul>
+
+
+	<div class="container">
+			<section class="row">
+        <div class = "image">
+           <img src="{% static 'placeholders/mom_son.png' %}">
+        </div>
+
+        <div class = "content">
+            <h2>About Us</h2>
+            <p>OrphanCare Foundation advocates and works to give children in institutions and unplanned newborn babies the opportunity to grow in the care of a family. We believe no child should be abandoned or denied the love and care of a family.</p>
+            <ul class = "links">
+                <li><a href = "#">work</a></li>
+                <div class = "vertical-line"></div>
+                <li><a href = "#">service</a></li>
+                <div class = "vertical-line"></div>
+                <li><a href = "#">contact</a></li>
+            </ul>
+            <ul class = "icons">
+                <li>
+                    <i class = "fa fa-twitter"></i>
+                </li>
+                <li>
+                    <i class = "fa fa-facebook"></i>
+                </li>
+                <li>
+                    <i class = "fa fa-github"></i>
+                </li>
+                <li>
+                    <i class = "fa fa-pinterest"></i>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <br>
+        <div class="credit">Made with <span style="color:tomato">❤</span> and Care.</div>
+	</div>
+{% endblock %}

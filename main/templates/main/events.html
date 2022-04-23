@@ -1,0 +1,35 @@
+{%extends "main/header.html" %}
+
+{% block content %}
+	<p style="font-weight: bold;" class="flow-text teal-text text-lighten-2 center-align">A pledge for social service is required from all sections of the society to uplift orphans and poor children. Everyone should have a social motive to help the poor, unfortunate and orphans for the cause of humanity and to protect child rights. 
+	</p>
+
+	<h5><strong>Events</strong></h5>
+
+	<div class="row">
+        {% for eve in events %}
+            <div class="col s12 m6 l4">
+                <div class="card z-depth-5">
+                    <div class="card-image">
+                        <img src="{{eve.poster.url}}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator purple-text text-darken-4">{{eve.event_name}}
+                            <i class="purple-text material-icons right">arrow_upward</i>
+                        </span>
+                        <p><strong>Organized By :</strong> {{eve.organised_by.orphanage_name}}</p>
+                        <p><strong>Date :</strong> {{eve.event_date}}</p>
+                        <p><strong>Timing :</strong> {{eve.event_time}}</p>
+                        <p><strong>Venue :</strong> {{eve.venue}}</p>
+                    </div>
+                    <div class="card-reveal">
+                         <span class="card-title grey-text text-darken-4"><strong>{{eve.event_name}}</strong><i class="material-icons right">close</i></span>
+                        <p>{{eve.description}}</p>
+                    </div>
+                </div>
+            </div>  
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

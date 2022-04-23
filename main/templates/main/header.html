@@ -1,0 +1,106 @@
+{% extends "main/base.html" %}
+
+{% block base %}
+	<div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="center-align"><h5>User Details</h5></div>
+      <p><strong>Username : </strong>{{user.username}}</p>
+      <p><strong>First Name : </strong>{{user.first_name}} | <strong>Last Name : </strong>{{user.last_name}}</p>
+      <p><strong>Email Address : </strong>{{user.email}}</p>
+    </div>
+  </div>
+
+	<nav class="purple">
+	    <div class="nav-wrapper">
+	      <a href="#!" class="brand-logo"> &nbsp; OrphanCare</a>
+	      <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+	      	<i class="large material-icons">menu</i>
+	      </a>
+	      <ul class="right hide-on-med-and-down">
+	        <li><a style="font-size:130%" href="/homepage">Home</a></li>
+        	<li><a style="font-size:130%"  href="/orphanages">Orphanages</a></li>
+        	<li><a style="font-size:130%"  href="{% url 'main:adoption' %}">Adoption</a></li>
+        	<li><a style="font-size:130%"  href="/events">Events</a></li>
+        	<li><a style="font-size:130%"  href="/about_us">About Us</a></li>
+	        {% if user.is_authenticated %}
+	             <li>
+	             	<a style="font-size:130%" data-target="modal1" class=" pink darken-3 modal-trigger">{{user.username|title}}</a>
+	             </li>
+
+	             <li>
+	             		<a class="pink darken-4" style="font-size:130%" href="/logout">Logout</a>
+	             	</li>
+	        {% else %}
+	        	<li><a style="font-size:130%" href="/register">Register</a></li>
+	            <li><a style="font-size:130%"  href="/login">Login</a></li>	            
+	        {% endif %}
+	      </ul>
+	    </div>
+  	</nav>
+
+	<ul class="sidenav purple lighten-3" id="mobile-demo">
+		<br>
+		
+		<li  class="brand-logo"><a style="font-size:170%" href="#!" class=" pink-text text-darken-3 brand-logo"> OrphanCare</a></li>
+		<br>
+		<li><a style="font-size:130%" href="/homepage">Home</a></li>
+		<li><a style="font-size:130%"  href="/orphanages">Orphanages</a></li>
+    	<li><a style="font-size:130%"  href="/events">Events</a></li>
+    	<li><a style="font-size:130%"  href="{% url 'main:adoption' %}">Adoption</a></li>
+    	<li><a style="font-size:130%"  href="/about_us">About Us</a></li>
+		{% if user.is_authenticated %}
+			<li><a class="pink darken-3 modal-trigger" data-target="modal1" style="font-size:150%"  href="#">{{user.username|title}}</a></li>
+			<li><a class="pink darken-4" style="font-size:150%" href="/logout">Logout</a></li>
+		{% else %}
+			<li><a style="font-size:130%" href="/register">Register</a></li>
+			<li><a style="font-size:130%"  href="/login">Login</a></li>
+		{% endif %}
+	</ul>
+
+
+  	{% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:2000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:3000});</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+        
+    <div class="container">
+    	{% block content %}
+	    {% endblock %}
+    </div>
+
+    <footer class="page-footer purple">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">OrphanCare</h5>
+          <p class="grey-text text-lighten-4"><strong>A Helping hand to the unpreviledged children. </strong> Not all of us can do great things but we can do small things with great love.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Some Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">FAQs</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Privacy Policy</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright purple darken-3">
+      <div class="container">
+      © 2020 Copyright OrphanCare. All Rights Reserved.
+      <a class="grey-text text-lighten-4 right" href="#!">Support Us</a>
+      </div>
+    </div>
+  </footer>
+{% endblock %}

@@ -1,0 +1,47 @@
+<head>
+	  <!-- Compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
+    <style type="text/css">
+    	body {
+		  	font-family: Algerian;
+		}
+    </style>
+    {% block ccss %}
+	  {% endblock %}
+</head>
+
+<body>
+  	{% block base %}
+  	{% endblock %}
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() {
+		var elems = document.querySelectorAll('.sidenav');
+		var instances = M.Sidenav.init(elems, edge="left");
+		});	
+
+		document.addEventListener('DOMContentLoaded', function() {
+	    var elems = document.querySelectorAll('select');
+	    var instances = M.FormSelect.init(elems);
+	  });
+
+	  document.addEventListener('DOMContentLoaded', function() {
+		var elems = document.querySelectorAll('.datepicker');
+		var instances = M.Datepicker.init(elems);
+		});
+
+	  document.addEventListener('DOMContentLoaded', function() {
+	    var elems = document.querySelectorAll('.collapsible');
+	    var instances = M.Collapsible.init(elems);
+	  });
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var elems = document.querySelectorAll('.modal');
+			var instances = M.Modal.init(elems);
+		});
+	</script>
+</body>
